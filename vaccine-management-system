@@ -1,0 +1,87 @@
+CREATE DATABASE vaccine_management_system;
+USE vaccine_management_system;
+
+-- USERS (Parent, Nurse, Admin)
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(255),
+    role ENUM('parent', 'nurse', 'admin'),
+    phone VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CHILDREN
+CREATE TABLE children (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    parent_id INT,
+    name VARCHAR(100),
+    date_of_birth DATE,
+    gender ENUM('male', 'female'),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (parent_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- VACCINES
+CREATE TABLE vaccines (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    description TEXT,
+    required_doses INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- APPOINTMENTS
+CREATE TABLE appointments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    child_id INT,
+    vaccine_id INT,
+    nurse_id INT,
+    appointment_date DATETIME,
+    status ENUM('scheduled', 'completed', 'cancelled'),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (child_id) REFERENCES children(id),
+    FOREIGN KEY (vaccine_id) REFERENCES vaccines(id),
+    FOREIGN KEY (nurse_id) REFERENCES users(id)
+);
+
+-- CERTIFICATES
+CREATE TABLE certificates (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    child_id INT,
+    issued_by INT,
+    issue_date DATE,
+    status ENUM('pending', 'approved', 'rejected'),
+    FOREIGN KEY (child_id) REFERENCES children(id),
+    FOREIGN KEY (issued_by) REFERENCES users(id)
+);
+
+-- NOTIFICATIONS
+CREATE TABLE notifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    message TEXT,
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- NURSE ASSIGNMENT
+CREATE TABLE nurse_assignments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nurse_id INT,
+    child_id INT,
+    assigned_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (nurse_id) REFERENCES users(id),
+    FOREIGN KEY (child_id) REFERENCES children(id)
+);
+
+-- AUDIT LOGS
+CREATE TABLE audit_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    action TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
