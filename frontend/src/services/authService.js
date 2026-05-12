@@ -23,6 +23,9 @@ export const register = (name, email, phone, password, confirmPassword) => {
   return api.post('/auth/register', { name, email, phone, password, confirm_password: confirmPassword });
 };
 
+
+
+
 /**
  * Get current authenticated user details
  * @returns {Promise} Axios response with user data

@@ -16,6 +16,11 @@ const Login = () => {
     setError('');
     setLoading(true);
 
+
+
+
+
+    
     // Basic validation
     if (!email.trim() || !password.trim()) {
       setError('Email and password are required');
