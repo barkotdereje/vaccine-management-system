@@ -15,6 +15,8 @@ class JwtHelper {
     private static $algo = 'HS256';
     private static $leeway = 60; // seconds
     
+
+    
     /**
      * Initialize JWT helper with secret key from environment
      * 

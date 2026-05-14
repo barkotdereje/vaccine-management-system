@@ -15,6 +15,9 @@
 require_once __DIR__ . '/../helpers/JwtHelper.php';
 require_once __DIR__ . '/../helpers/Response.php';
 
+
+
+
 class AuthMiddleware {
     /**
      * List of routes that do not require authentication

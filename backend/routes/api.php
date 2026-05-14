@@ -12,6 +12,8 @@
 
 // ==================== PUBLIC ROUTES (No Authentication) ====================
 
+
+
 // Authentication
 $router->post('/auth/register', 'AuthController', 'register');
 $router->post('/auth/login', 'AuthController', 'login');

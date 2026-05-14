@@ -8,6 +8,8 @@ const AuthContext = createContext();
 // Custom hook to use auth context
 export const useAuth = () => useContext(AuthContext);
 
+
+
 // JWT decode helper (simple)
 const decodeToken = (token) => {
   try {

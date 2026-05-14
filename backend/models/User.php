@@ -20,6 +20,8 @@ class User {
     public function __construct() {
         $this->db = Database::getConnection();
     }
+ 
+    
     
     /**
      * Find user by ID

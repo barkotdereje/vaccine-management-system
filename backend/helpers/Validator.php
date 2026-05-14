@@ -24,6 +24,8 @@ class Validator {
         if (is_string($value)) return trim($value) !== '';
         return !empty($value);
     }
+  
+    
     
     /**
      * Validate email address format

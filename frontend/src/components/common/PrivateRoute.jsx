@@ -12,6 +12,8 @@ import { useAuth } from '../../contexts/AuthContext';
 const PrivateRoute = ({ allowedRoles = [] }) => {
   const { user, loading } = useAuth();
 
+
+  
   // Show loading spinner while checking authentication
   if (loading) {
     return (

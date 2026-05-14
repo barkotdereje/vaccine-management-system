@@ -12,6 +12,8 @@ const api = axios.create({
   timeout: 30000, // 30 seconds timeout
 });
 
+
+
 // Request interceptor to add token to headers
 api.interceptors.request.use(
   (config) => {
